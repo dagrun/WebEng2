@@ -11,12 +11,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140508180750) do
+ActiveRecord::Schema.define(version: 20140508184808) do
 
   create_table "groups", force: true do |t|
-    t.integer  "members"
+    t.integer  "members_user_id"
     t.string   "topic"
-    t.integer  "owner"
+    t.integer  "owner_user_id"
     t.string   "home_town"
     t.datetime "created_at"
     t.datetime "updated_at"
