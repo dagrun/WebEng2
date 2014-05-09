@@ -1,4 +1,6 @@
 MeetAct::Application.routes.draw do
+  resources :groups
+
   resources :users
   match '/signup',  to: 'users#new',            via: 'get'
 
