@@ -1,8 +1,6 @@
 class Group < ActiveRecord::Base
-	#has_many :members, class_name: 'User'
-	#belongs_to :owner, class_name: 'User'
 	has_many :group_users, :dependent => :destroy
-	has_many :groups, :through => group_user
+	has_many :groups, :through => :group_users
 	validates :topic, length: {minimum: 3, maximum: 50}
 	validates :home_town, length: {minimum: 3, maximum: 70}
 	
