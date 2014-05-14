@@ -1,6 +1,6 @@
 class GroupsController < ApplicationController
  before_action :signed_in_user, only: [:create, :destroy]
-  before_action :correct_user,   only: :destroy
+ before_action :correct_user,   only: :destroy
   
   def create
     @group = current_user.groups.build(group_params)
@@ -21,7 +21,7 @@ class GroupsController < ApplicationController
   private
 
     def group_params
-      params.require(:group).permit(:topic)
+      params.require(:group).permit(:topic, :home_town)
     end
 		def correct_user
       @group = current_user.groups.find_by(id: params[:id])
