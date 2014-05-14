@@ -3,11 +3,12 @@ class GroupsController < ApplicationController
   before_action :correct_user,   only: :destroy
   
   def create
-    @groups = current_user.groupss.build(groups_params)
-    if @groups.save
+    @group = current_user.groups.build(group_params)
+    if @group.save
       flash[:success] = "Group created!"
       redirect_to root_url
     else
+      flash[:error] = "Group wasn't crated"
       redirect_to root_url
     end
   end
@@ -19,8 +20,8 @@ class GroupsController < ApplicationController
 
   private
 
-    def groups_params
-      params.require(:groups).permit(:content)
+    def group_params
+      params.require(:group).permit(:topic)
     end
 		def correct_user
       @group = current_user.groups.find_by(id: params[:id])
