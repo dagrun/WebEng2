@@ -1,7 +1,7 @@
 class WelcomeController < ApplicationController
 	def index
     if signed_in?
-      @group  = current_user.groups.build
+      @groups = current_user.groups
       if @group.nil?
         @group = Group.new
       end
