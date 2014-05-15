@@ -13,7 +13,8 @@ class UsersController < ApplicationController
   # GET /users/1.json
   def show
     @user = User.find(params[:id])
-    @groups = @user.groups
+    @owned_groups = @user.owned_groups
+    @member_of_groups = @user.groups
     if @user == current_user
         @group = Group.new
     end

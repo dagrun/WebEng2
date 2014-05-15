@@ -15,14 +15,14 @@
   </div>
   <div class="row-fluid">
     <section class="span11 offset1">
-      <% if @user.groups.any? %>
+      <% if @owned_groups.any? %>
         <h3>Meetup groups 
         <% if @group.nil? %>
           <%= @user.name %> 
         <% else%>
           I
         <%end%>
-        administer(<%= @user.groups.count %>):</h3>
+        administer(<%= @owned_groups.count %>):</h3>
           <div class="row-fluid">
             <div class="span4">
               <b>Topic</b>
@@ -31,7 +31,7 @@
               <b>Home Town</b>
             </div>
           </div>
-          <% @groups.each do |g| %>
+          <% @owned_groups.each do |g| %>
             <div class="row-fluid">
               <div class="span4">
                 <%= g.topic%>
@@ -44,6 +44,42 @@
                   <%= link_to 'Edit', edit_group_path(g) %>
                 </div>
               <%end%>
+            </div>
+          <%end%>
+      <% end %>
+    </section>
+  </div>
+  
+  
+   <div class="row-fluid">
+    <section class="span11 offset1">
+      <% if @member_of_groups.any? %>
+        <h3>Meetup groups 
+        <% if @group.nil? %>
+          <%= @user.name %> is
+        <% else%>
+          I am
+        <%end%>
+        a member of(<%= @member_of_groups.count %>):</h3>
+          <div class="row-fluid">
+            <div class="span4">
+              <b>Topic</b>
+            </div>
+            <div class="span2 offset1">
+              <b>Home Town</b>
+            </div>
+          </div>
+          <% @member_of_groups.each do |g| %>
+            <div class="row-fluid">
+              <div class="span4">
+                <%= g.topic%>
+              </div>
+              <div class="span2 offset1">
+                <%= g.home_town %>
+              </div>
+                <div class="span1 offset1">
+                  <%= link_to 'View', group_path(g) %>
+                </div>
             </div>
           <%end%>
       <% end %>
