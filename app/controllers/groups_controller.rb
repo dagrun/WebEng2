@@ -1,6 +1,6 @@
 class GroupsController < ApplicationController
  before_action :signed_in_user, only: [:create, :destroy]
- before_action :correct_user,   only: :destroy
+ before_action :correct_user,   only: [:destroy, :edit, :update]
   
   def create
     @group = current_user.groups.build(group_params)
@@ -12,7 +12,21 @@ class GroupsController < ApplicationController
       redirect_to root_url
     end
   end
-
+  
+  def edit
+    @group = Group.find(params[:id])
+  end
+  
+  def update
+    @group = Group.find(params[:id])
+    if @group.update_attributes(group_params)
+      flash[:success] = "Group updated"
+      redirect_to current_user
+    else
+      render 'edit'
+    end
+  end
+  
   def destroy
     @group.destroy
     redirect_to root_url
@@ -23,6 +37,7 @@ class GroupsController < ApplicationController
     def group_params
       params.require(:group).permit(:topic, :home_town)
     end
+    
 		def correct_user
       @group = current_user.groups.find_by(id: params[:id])
       redirect_to root_url if @group.nil?

@@ -1,0 +1,18 @@
+<% provide(:title, "Edit Meetup Group") %>
+<h1>Edit Meetup Group</h1>
+
+<div class="row-fluid">
+  <div class="span11 offset1">
+    <%= form_for(@group) do |f| %>
+      <%= render 'shared/error_messages', object: f.object %>
+
+      <%= f.label :topic %>
+      <%= f.text_field :topic %>
+
+      <%= f.label :home_town %>
+      <%= f.text_field :home_town %>
+
+      <%= f.submit "Save changes", class: "btn btn-large btn-primary" %>
+    <% end %>
+  </div>
+</div>

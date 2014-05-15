@@ -16,15 +16,36 @@
   <div class="row-fluid">
     <section class="span11 offset1">
       <% if @user.groups.any? %>
-        <h3>Meetup groups <%= @user.name %> administer(<%= @user.groups.count %>):</h3>
-        <table>
-          <tr>
+        <h3>Meetup groups 
+        <% if @group.nil? %>
+          <%= @user.name %> 
+        <% else%>
+          I
+        <%end%>
+        administer(<%= @user.groups.count %>):</h3>
+          <div class="row-fluid">
+            <div class="span4">
+              <b>Topic</b>
+            </div>
+            <div class="span2 offset1">
+              <b>Home Town</b>
+            </div>
+          </div>
           <% @groups.each do |g| %>
-            <%= g.topic%>
-            <%= g.home_town %>
+            <div class="row-fluid">
+              <div class="span4">
+                <%= g.topic%>
+              </div>
+              <div class="span2 offset1">
+                <%= g.home_town %>
+              </div>
+              <% unless @group.nil? %>
+                <div class="span1 offset1">
+                  <%= link_to 'Edit', edit_group_path(g) %>
+                </div>
+              <%end%>
+            </div>
           <%end%>
-          </tr>
-        </table>
       <% end %>
     </section>
   </div>
