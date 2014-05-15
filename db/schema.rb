@@ -24,8 +24,10 @@ ActiveRecord::Schema.define(version: 20140514201218) do
   add_index "groups", ["owner_id", "created_at"], name: "index_groups_on_owner_id_and_created_at"
 
   create_table "memberships", force: true do |t|
-    t.integer "user_id"
-    t.integer "group_id"
+    t.integer  "user_id"
+    t.integer  "group_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "users", force: true do |t|
