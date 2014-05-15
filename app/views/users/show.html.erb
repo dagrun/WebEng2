@@ -1,21 +1,28 @@
 <% provide(:title, @user.name) %>
-<div class="row">
-  <aside class="span4">
-    <section>
+  <div class="row-fluid">
+    <section class="span4 offset1">
       <h1>
         <%= @user.name %>
       </h1>
+      <%= link_to 'Edit', edit_user_path(@user) %> |
+      <%= link_to 'Back', users_path %>
     </section>
-  </aside>
-	<div class="span8">
-    <% if @user.groups.any? %>
-      <h3>Gruops (<%= @user.groups.count %>)</h3>
-      <ol class="groups">
-        <%= render @groups %>
-      </ol>
-    <% end %>
+    <section class="span4 offset1">
+      <%= render 'shared/group_form' %>
+    </section>
+    <section class="span12">
+      <% if @user.groups.any? %>
+        <h3>Groups i administer(<%= @user.groups.count %>):</h3>
+        <table>
+          <tr>
+          <% @groups.each do |g| %>
+            <%= g.topic%>
+            <%= g.home_town %>
+          <%end%>
+          </tr>
+        </table>
+      <% end %>
+    </section>
   </div>
-</div>
 
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+

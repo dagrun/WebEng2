@@ -14,6 +14,9 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @groups = @user.groups
+    if @group.nil?
+      @group = Group.new
+    end
   end
 
   # GET /users/new

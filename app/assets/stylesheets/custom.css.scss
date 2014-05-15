@@ -7,11 +7,19 @@ html {
 }
 
 body {
-  padding-top: 60px;
+  padding-top: 70px;
+  background-color: blueviolet;
+}
+
+.container{
+  background-color: white;
+  padding: 3%;
+  padding-top: 2%;
 }
 
 section {
   overflow: auto;
+  padding-bottom: 2%;
 }
 
 textarea {
@@ -26,34 +34,18 @@ textarea {
   margin-bottom: 10px;
 }
 
-/* typography */
-
-h1, h2, h3, h4, h5, h6 {
-  line-height: 1;
-}
-
-h1 {
-  font-size: 3em;
-  letter-spacing: -2px;
-  margin-bottom: 30px;
-  text-align: center;
-}
-
-h2 {
-  font-size: 1.2em;
-  letter-spacing: -1px;
-  margin-bottom: 30px;
-  text-align: center;
-  font-weight: normal;
-  color: #999;
-}
-
-p {
-  font-size: 1.1em;
-  line-height: 1.7em;
-}
 
 /* header */
+
+header{
+  background-color: black;
+}
+
+.container_header{
+  background-color: black;
+  padding-top: 0%;
+  padding-bottom: 0%;
+}
 
 #logo {
   float: left;

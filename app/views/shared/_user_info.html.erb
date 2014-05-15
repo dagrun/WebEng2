@@ -1,18 +1,7 @@
 <h1>
+  Welcome
   <%= current_user.name %>
 </h1>
 <span>
   <%= link_to "view my profile", current_user %>
-</span>
-<span>
-  <ul>
-    <% @groups.each do |g| %>
-      <li>
-        <%= g.topic%>
-      </li>
-      <li>
-        <%= g.home_town %>
-      </li>
-    <%end%>
-  </ul>
 </span>
