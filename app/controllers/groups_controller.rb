@@ -2,6 +2,11 @@ class GroupsController < ApplicationController
  before_action :signed_in_user, only: [:create, :destroy]
  before_action :correct_user,   only: [:destroy, :edit, :update]
   
+  def show
+    @group = Group.find(params[:id])
+    @members = @group.users
+  end
+  
   def create
     @group = current_user.groups.build(group_params)
     if @group.save
