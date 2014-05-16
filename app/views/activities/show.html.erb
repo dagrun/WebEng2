@@ -1,0 +1,24 @@
+<p>
+  <strong>Title:</strong>
+  <%= @group.topic %>
+</p>
+ 
+<p>
+  <strong>Text:</strong>
+  <%= @group.description %>
+</p>
+ 
+<h2>Add an Activtiy:</h2>
+<%= form_for([@group, @group.activities.build]) do |f| %>
+  <p>
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </p>
+
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>
+ 
+<%= link_to 'Back', groups_path %>
+| <%= link_to 'Edit', edit_group_path(@group) %>

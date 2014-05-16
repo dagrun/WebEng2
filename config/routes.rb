@@ -1,7 +1,9 @@
 MeetAct::Application.routes.draw do
   root 'welcome#index'
   resources :users
-  resources :groups
+  resources :groups do
+	resources :activites
+  end
   resources :memberships, only: [:new, :create, :destroy]
 	resources :sessions, only: [:new, :create, :destroy]
   match '/signup',  to: 'users#new',            via: 'get'

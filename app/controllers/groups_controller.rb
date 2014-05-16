@@ -9,11 +9,12 @@ class GroupsController < ApplicationController
   
   def create
     @group = current_user.groups.build(group_params)
+	@group.owner_id = current_user["id"]
     if @group.save
       flash[:success] = "Group created!"
       redirect_to root_url
     else
-      flash[:error] = "Group wasn't crated"
+      flash[:error] = "Group wasn't created"
       redirect_to root_url
     end
   end
@@ -48,7 +49,7 @@ class GroupsController < ApplicationController
       params.require(:group).permit(:topic, :home_town)
     end
     
-		def correct_user
+	def correct_user
       @group = current_user.groups.find_by(id: params[:id])
       redirect_to root_url if @group.nil?
     end
