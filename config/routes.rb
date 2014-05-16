@@ -2,7 +2,7 @@ MeetAct::Application.routes.draw do
   root 'welcome#index'
   resources :users
   resources :groups do
-	resources :activites
+	resources :activities
   end
   resources :memberships, only: [:new, :create, :destroy]
 	resources :sessions, only: [:new, :create, :destroy]
