@@ -26,9 +26,44 @@
     </div>
   <%end%>
 </div>
- 
+  <h3>Activities: </h3>
+  <% @group.activities.each do |activity| %>
+      <strong>Name:</strong>
+      <%= activity.name %><br/>
+        <br/>
+      <%= image_tag(activity.image_url, :size => '250x250') %>
+        <br/>
+      <strong>Location</strong>
+      <%= activity.location %><br/>
+      <strong>Duration:</strong><br/>
+      <%= activity.start_date %><br/>
+      <%= activity.end_date %><br/>
+      <strong>Description</strong>
+      <%= activity.description %><br/><br/>
+  <% end %>
+
+
 <h2>Add an Activtiy:</h2>
-<p> Has to be implemented </p>
+  <%= form_for([@group, @group.activities.build]) do |f| %>
+      <%= f.label :name %>
+      <%= f.text_field :name %>
+
+      <%= f.label :Location %>
+      <%= f.text_field :location %>
+
+      <%= f.label :Start %>
+      <%= f.datetime_field :start_date %>
+      <%= f.label :End%>
+      <%= f.datetime_field :end_date%>
+
+      <%= f.label :Description %>
+      <%= f.text_field :description %>
+
+      <%= f.label :ImageURL %>
+      <%= f.url_field :image_url %>
+
+      <%= f.submit %>
+  <% end %>
  
 <%= link_to 'Back', groups_path %>
 | <%= link_to 'Edit', edit_group_path(@group) %>
