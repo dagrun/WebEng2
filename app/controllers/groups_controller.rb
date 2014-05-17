@@ -5,11 +5,12 @@ class GroupsController < ApplicationController
   def show
     @group = Group.find(params[:id])
     @members = @group.users
+    #@activities = @group.activities.build
   end
   
   def create
     @group = current_user.groups.build(group_params)
-	@group.owner_id = current_user["id"]
+	  @group.owner_id = current_user["id"]
     if @group.save
       flash[:success] = "Group created!"
       redirect_to root_url
