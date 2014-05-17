@@ -1,7 +1,8 @@
 class ActivitiesController < ApplicationController
   def create
-    @group = Article.find(params[:group_id])
+    @group = Group.find(params[:group_id])
     @activity = @group.activities.create(activity_params)
+    #@activity.group_id = @group[:id]
     redirect_to group_path(@group)
   end
  
