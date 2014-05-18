@@ -5,7 +5,11 @@ class GroupsController < ApplicationController
   def show
     @group = Group.find(params[:id])
     @members = @group.users
-    #@activities = @group.activities.build
+    if @group.activities.count == 0
+      @activities = @group.activities.build
+    else
+      @activities = @group.activities.last
+    end
   end
   
   def create

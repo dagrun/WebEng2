@@ -2,18 +2,18 @@ MeetAct::Application.routes.draw do
   root 'welcome#index'
   resources :users
   resources :groups do
-	resources :activities do
-  member do
-    post 'upvote'
-  end
-end
+	  resources :activities do
+      member do
+        post 'upvote'
+      end
+    end
   end
   resources :memberships, only: [:new, :create, :destroy]
 	resources :sessions, only: [:new, :create, :destroy]
   match '/signup',  to: 'users#new',            via: 'get'
   match '/signin',  to: 'sessions#new',         via: 'get'
   match '/signout', to: 'sessions#destroy',     via: 'delete'
-  
+
   match '/createmem', to: 'memberships#create', via: 'get'
 
   # The priority is based upon order of creation: first created -> highest priority.
