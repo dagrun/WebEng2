@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140516120933) do
+ActiveRecord::Schema.define(version: 20140518145614) do
 
   create_table "activities", force: true do |t|
     t.string   "name"
@@ -38,8 +38,10 @@ ActiveRecord::Schema.define(version: 20140516120933) do
   add_index "groups", ["owner_id", "created_at"], name: "index_groups_on_owner_id_and_created_at"
 
   create_table "memberships", force: true do |t|
-    t.integer "user_id"
-    t.integer "group_id"
+    t.integer  "user_id"
+    t.integer  "group_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "users", force: true do |t|
@@ -54,5 +56,11 @@ ActiveRecord::Schema.define(version: 20140516120933) do
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
   add_index "users", ["remember_token"], name: "index_users_on_remember_token"
+
+  create_table "votes", force: true do |t|
+    t.integer  "activity_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
 end
