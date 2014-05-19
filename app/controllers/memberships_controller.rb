@@ -25,7 +25,7 @@ class MembershipsController < ApplicationController
       params.require(:membership).permit(:user, :group)
     end
 		def correct_user
-      @group = current_user.groups.find_by(id: params[:group])
+      @group = current_user.owned_groups.find_by(id: params[:group])
       redirect_to root_url if @group.nil?
     end
 end
