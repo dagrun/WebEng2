@@ -12,10 +12,28 @@ class GroupsController < ApplicationController
     end
   end
   
+  def new
+    @group = Group.new
+    @users = User.all
+    @users.delete(current_user)
+  end
+  
   def create
     @group = current_user.owned_groups.build(group_params)
+    if(params.has_key?(:members))
+      @user = User.find(params[:members])
+    end
 	  @group.owner_id = current_user["id"]
     if @group.save
+      unless @user.nil?
+        @user.each do |u|
+          @membership = Membership.new(:group_id => @group.id, :user_id => u.id )  
+          if @membership.save
+          else
+            flash[:error]="A user wasn't added to group"
+          end
+        end
+      end
       flash[:success] = "Group created!"
       redirect_to current_user
     else

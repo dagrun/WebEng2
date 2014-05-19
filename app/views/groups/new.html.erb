@@ -1,0 +1,16 @@
+<% provide(:title, 'new group') %>
+<h1>Create Group</h1>
+
+<div class="row">
+  <div class="span6 offset1">
+    <%= form_for(@group) do |f| %>
+			<%= render 'shared/error_messages', object: f.object %>
+      <%= f.text_area :topic, placeholder: "Topic for this group..." %>
+      <%= f.label :home_town%>
+      <%= f.text_field :home_town%>
+      <%= f.label "Add members"%>
+      <%= select_tag "members", options_from_collection_for_select(@users, "id", "name"), multiple: true %>
+      <%= f.submit "Create", class: "btn btn-large btn-primary" %>
+    <% end %>
+  </div>
+</div>

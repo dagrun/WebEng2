@@ -6,5 +6,6 @@
     <%= f.label :home_town%>
     <%= f.text_field :home_town%>
   </div>
-  <%= f.submit "Post", class: "btn btn-large btn-primary" %>
+  <%= f.submit "Create", class: "btn btn-large btn-primary" %>
+  <%= link_to "Make group with users", new_group_path(@group) %>
 <% end %>
