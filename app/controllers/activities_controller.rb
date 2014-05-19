@@ -9,10 +9,11 @@ class ActivitiesController < ApplicationController
 
   def upvote
 	  @activity = Activity.find(params[:id])
-    if Vote.find(current_user.id) == nil
+    @vote1 = Vote.find_by_id(current_user.id)
+    if @vote1 == nil
       @activity.votes.create
       @vote = @activity.votes.last
-      @vote.user_id = @current_user.id
+      @vote.user_id = current_user.id
     end
     @group = Group.find(params[:group_id])
 	  redirect_to(group_path(@group))

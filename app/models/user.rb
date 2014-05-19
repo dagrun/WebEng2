@@ -2,6 +2,7 @@ class User < ActiveRecord::Base
   has_many :owned_groups, {foreign_key: "owner_id", dependent: :destroy, class_name: "Group"}
   has_many :memberships, {dependent: :destroy}
   has_many :groups, {through: :memberships, class_name: "Group", dependent: :destroy}
+  has_many :votes
   before_save { self.email = email.downcase }
 	before_create :create_remember_token
   validates :name, presence: true, length: { maximum: 50 }

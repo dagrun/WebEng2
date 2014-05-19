@@ -26,7 +26,9 @@
     </div>
   <%end%>
 </div>
+  <% if @group.activities.count > 0 %>
   <h3>Activities: </h3>
+
     <% @group.activities.each do |activity| %>
         <strong>Name:</strong>
          <%= activity.name %><br/>
@@ -42,11 +44,12 @@
        <%= activity.description %><br/>
           <strong>Votes</strong>
           <%= pluralize(activity.votes.count, "vote") %>
-      <%= button_to 'Upvote', upvote_group_activity_path(@group.id, activity.id), method: :post %>
+      <%= button_to '+1', upvote_group_activity_path(@group.id, activity.id), method: :post %>
     <br/><br/>
    <% end %>
+ <% end %>
 
-
+<%if @group.owner_id == current_user.id %>
 <h2>Add an Activtiy:</h2>
   <%= form_for([@group, @group.activities.build]) do |f| %>
       <%= f.label :name %>
@@ -68,6 +71,6 @@
 
       <%= f.submit %>
   <% end %>
- 
+<% end %>
 <%= link_to 'Back', groups_path %>
 | <%= link_to 'Edit', edit_group_path(@group) %>
