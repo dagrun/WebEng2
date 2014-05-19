@@ -43,10 +43,18 @@ select, textarea, input[type="text"], input[type="password"], input[type="dateti
   display: block;
 }
 
+a{
+  margin: 2%
+}
+
 /* header */
 
 header{
   background-color: black;
+}
+
+header a{
+  margin: 0%;
 }
 
 .container_header{
