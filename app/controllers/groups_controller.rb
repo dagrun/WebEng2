@@ -17,10 +17,10 @@ class GroupsController < ApplicationController
 	  @group.owner_id = current_user["id"]
     if @group.save
       flash[:success] = "Group created!"
-      redirect_to root_url
+      redirect_to current_user
     else
       flash[:error] = "Group wasn't created"
-      redirect_to root_url
+      redirect_to current_user
     end
   end
   

@@ -18,7 +18,7 @@
 </div>
 
 
-<% unless @nonmembers.nil? %>
+<% if @nonmembers.count>0 %>
   <div class="row-fluid">
     <h2>Add users:</h2>
     <% @nonmembers.each do |m| %>
@@ -27,5 +27,9 @@
         <%= link_to 'Add', createmem_path( :member=> m, :group => @group ) %>
       </div>
     <%end%>
+  </div>
+<%else%>
+  <div class="row-fluid">
+    <h3>All users are all ready members</h3>
   </div>
 <%end%>
