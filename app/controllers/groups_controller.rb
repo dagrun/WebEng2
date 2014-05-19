@@ -5,15 +5,21 @@ class GroupsController < ApplicationController
   def show
     @group = Group.find(params[:id])
     @members = @group.users
+    if @group.activities.count == 0
+      @activities = @group.activities.build
+    else
+      @activities = @group.activities.last
+    end
   end
   
   def create
-    @group = current_user.groups.build(group_params)
+    @group = current_user.owned_groups.build(group_params)
+	  @group.owner_id = current_user["id"]
     if @group.save
       flash[:success] = "Group created!"
       redirect_to root_url
     else
-      flash[:error] = "Group wasn't crated"
+      flash[:error] = "Group wasn't created"
       redirect_to root_url
     end
   end
@@ -49,7 +55,7 @@ class GroupsController < ApplicationController
     end
     
 		def correct_user
-      @group = current_user.groups.find_by(id: params[:id])
+      @group = current_user.owned_groups.find_by(id: params[:id])
       redirect_to root_url if @group.nil?
     end
 end
