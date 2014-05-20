@@ -19,7 +19,11 @@ class ActivitiesController < ApplicationController
 	  redirect_to(group_path(@group))
   end
 
-
+def setdef
+ @activity = Activity.find(params[:activity_id]) 
+@activity.update_attribute(:definitive, true)
+  redirect_to :back
+end
 
  
   private

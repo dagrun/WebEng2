@@ -8,6 +8,9 @@ MeetAct::Application.routes.draw do
       end
     end
   end
+resources :activities do
+	post 'setdef'
+end
   resources :memberships, only: [:new, :create, :destroy]
 	resources :sessions, only: [:new, :create, :destroy]
   match '/signup',  to: 'users#new',            via: 'get'
