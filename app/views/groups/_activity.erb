@@ -1,0 +1,15 @@
+<strong>Name:</strong>
+    <%= activity.name %><br/>
+<br/>
+    <%= image_tag(activity.image_url, :size => '250x250') %>
+<br/>
+<strong>Location</strong>
+    <%= activity.location %><br/>
+<strong>Duration:</strong><br/>
+    <%= activity.start_date %><br/>
+    <%= activity.end_date %><br/>
+<strong>Description</strong>
+    <%= activity.description %><br/>
+<strong>Votes</strong>
+    <%= pluralize(activity.votes.count, "vote") %>
+    <%= button_to '+1', upvote_group_activity_path(@group.id, activity.id), method: :post %>

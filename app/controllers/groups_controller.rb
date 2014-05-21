@@ -12,6 +12,26 @@ class GroupsController < ApplicationController
     end
   end
   
+   def search
+   @group = Group.find(params[:id])
+   results = flickr.photos.search(:api_key => MY_KEY, :tags => params[:search])
+   amount_images = 6
+   i = 0
+   list_url = [amount_images]
+   results.each do |r|
+     if i == amount_images
+       break
+     end
+     info = flickr.photos.getInfo(:photo_id => r.id)
+     url = FlickRaw.url_b(info)
+     list_url[i] = url
+     i = i + 1
+   end
+   Rails.cache.write('list_url', list_url)
+   redirect_to group_path(@group.id)
+ end
+  
+  
   def new
     @group = Group.new
     @users = User.all

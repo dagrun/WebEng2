@@ -1,0 +1,23 @@
+<%if member_count > 0 %>
+    <div class="row-fluid">
+      <div class="span11 offset1">
+        <h3>Members:</h3>
+      </div>
+    </div>
+    <div class="row-fluid">
+      <% @members.each do |m| %>
+          <div class="span2 offset1">
+            <%=m.name%>
+          </div>
+          <div class="span2 offset1">
+            <%= link_to "View", user_path %>
+          </div>
+      <%end%>
+    </div>
+<%else%>
+    <div class="row-fluid">
+      <div class="span11 offset1">
+        <h4>There is no members of this group yet</h4>
+      </div>
+    </div>
+<%end%>

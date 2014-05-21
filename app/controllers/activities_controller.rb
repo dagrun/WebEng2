@@ -1,5 +1,7 @@
 class ActivitiesController < ApplicationController
 
+  def index
+  end
 
   def create
     @group = Group.find(params[:group_id])
@@ -9,19 +11,19 @@ class ActivitiesController < ApplicationController
 
   def upvote
 	  @activity = Activity.find(params[:id])
-    @vote1 = Vote.find_by_id(current_user.id)
+      @vote1 = @activity.votes.find_by :user_id => current_user.id
     if @vote1 == nil
       @activity.votes.create
       @vote = @activity.votes.last
       @vote.user_id = current_user.id
     end
     @group = Group.find(params[:group_id])
-	  redirect_to(group_path(@group))
+	redirect_to(group_path(@group))
   end
 
 def setdef
- @activity = Activity.find(params[:activity_id]) 
-@activity.update_attribute(:definitive, true)
+  @activity = Activity.find(params[:activity_id]) 
+  @activity.update_attribute(:definitive, true)
   redirect_to :back
 end
 

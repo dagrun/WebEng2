@@ -11,60 +11,15 @@
   </div>
 </div>
 
-<%if @members.count>0%>
-  <div class="row-fluid">
-    <div class="span11 offset1">
-      <h3>Members:</h3>
-    </div>
-  </div>
-    <div class="row-fluid">
-      <% @members.each do |m| %>
-        <div class="span2 offset1">
-          <%=m.name%>
-        </div>
-        <div class="span2 offset1">
-          <%= link_to "View", user_path %>
-        </div>
-      <%end%>
-    </div>
-<%else%>
-  <div class="row-fluid">
-    <div class="span11 offset1">
-      <h4>There is no members of this group yet</h4>
-    </div>
-  </div>
-<%end%>
+
+<%= render partial: "member_info", locals: {member_count: @members.count} %>
 
   
   <% if @group.activities.count > 0 %>
   <div class="row-fluid">
     <h3>Activities: </h3>
 
-      <% @group.activities.each do |activity| %>
-          <strong>Name:</strong>
-           <%= activity.name %><br/>
-             <br/>
-           <%= image_tag(activity.image_url, :size => '250x250') %>
-             <br/>
-            <strong>Location</strong>
-            <%= activity.location %><br/>
-         <strong>Duration:</strong><br/>
-         <%= activity.start_date %><br/>
-         <%= activity.end_date %><br/>
-         <strong>Description</strong>
-         <%= activity.description %><br/>
-            <strong>Votes</strong>
-            <%= pluralize(activity.votes.count, "vote") %>
-        <%= button_to '+1', upvote_group_activity_path(@group.id, activity.id), method: :post %>
-	<strong>Definitive</strong>
-        <% if activity.definitive %>
-		<p>Yes</p>
-	<% else %>
-		<p>No</p>
-		<% if current_user.id == @group.owner_id %>
-			<%= button_to 'Set definitive', activity_setdef_path(activity.id), method: :post %>
-		<% end %>
-	<% end %>
+     <%= render partial: "member_info", locals: {member_count: @members.count} %>
       <br/><br/>
      <% end %>
     </div>
@@ -72,6 +27,23 @@
 
 <%if @group.owner_id == current_user.id %>
 <h2>Add an Activtiy:</h2>
+          <p>Give it an Image</p>
+            <script>var selected_image_url = "";</script>
+            <%= form_tag(search_group_path, :method => "post", id: "search-form") do %>
+              <%= text_field_tag :search, params[:search], placeholder: "Enter Search Terms" %>
+              <%= submit_tag "Search", :name => nil %>
+            <% end %>
+            <% if Rails.cache.read('list_url') != nil %>
+                     <%Rails.cache.read('list_url').each do |image|%>
+                        <%= image_tag(image,:size => '250x250') %>
+                        <%= radio_button_tag 'image_url', image, onchange: =>
+                            'selected_image_url = '
+                        %>
+                     <% end %>
+                <% Rails.cache.clear %>
+            <% end %>
+
+
   <%= form_for([@group, @group.activities.build]) do |f| %>
       <%= f.label :name %>
       <%= f.text_field :name %>
@@ -87,8 +59,7 @@
       <%= f.label :Description %>
       <%= f.text_field :description %>
 
-      <%= f.label :ImageURL %>
-      <%= f.url_field :image_url %>
+
 
       <%= f.submit %>
   <% end %>

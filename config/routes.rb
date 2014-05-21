@@ -2,6 +2,9 @@ MeetAct::Application.routes.draw do
   root 'welcome#index'
   resources :users
   resources :groups do
+    member do
+      post 'search'
+    end
 	  resources :activities do
       member do
         post 'upvote'
