@@ -19,11 +19,10 @@
   <div class="row-fluid">
     <h3>Activities: </h3>
 
-     <%= render partial: "member_info", locals: {member_count: @members.count} %>
+     <%= render partial: "activity", collection: @group.activities %>
       <br/><br/>
      <% end %>
     </div>
-  <% end %>
 
 <%if @group.owner_id == current_user.id %>
 <h2>Add an Activtiy:</h2>
@@ -36,9 +35,8 @@
             <% if Rails.cache.read('list_url') != nil %>
                      <%Rails.cache.read('list_url').each do |image|%>
                         <%= image_tag(image,:size => '250x250') %>
-                        <%= radio_button_tag 'image_url', image, onchange: =>
-                            'selected_image_url = '
-                        %>
+                        <%= radio_button_tag 'image_url', image %>
+
                      <% end %>
                 <% Rails.cache.clear %>
             <% end %>
