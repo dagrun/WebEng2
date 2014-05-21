@@ -14,9 +14,7 @@ class ActivitiesController < ApplicationController
 	  @activity = Activity.find(params[:id])
       @vote1 = @activity.votes.find_by :user_id => current_user.id
     if @vote1 == nil
-      @activity.votes.create
-      @vote = @activity.votes.last
-      @vote.user_id = current_user.id
+      @activity.votes.create(:user_id => current_user.id)
     end
     @group = Group.find(params[:group_id])
 	redirect_to(group_path(@group))
