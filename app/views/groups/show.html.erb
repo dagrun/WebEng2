@@ -22,7 +22,6 @@
      <%= render partial: "activity", collection: @group.activities %>
       <br/><br/>
      <% end %>
-    </div>
 
 <%if @group.owner_id == current_user.id %>
 <h2>Add an Activtiy:</h2>
@@ -64,3 +63,4 @@
 <% end %>
 <%= link_to 'Back', groups_path %>
 | <%= link_to 'Edit', edit_group_path(@group) %>
+</div>
