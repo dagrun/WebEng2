@@ -39,6 +39,7 @@ end
 
 gem 'flickraw'
 
+gem 'twitter_oauth'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'
 
