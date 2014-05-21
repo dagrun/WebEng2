@@ -13,3 +13,12 @@
 <strong>Votes</strong>
     <%= pluralize(activity.votes.count, "vote") %>
     <%= button_to '+1', upvote_group_activity_path(@group.id, activity.id), method: :post %>
+<strong>Definitive</strong>
+<% if activity.definitive %>
+    <p>Yes</p>
+<% else %>
+    <p>No</p>
+    <% if current_user.id == @group.owner_id %>
+        <%= button_to 'Set definitive', activity_setdef_path(activity.id), method: :post %>
+    <% end %>
+<% end %>
