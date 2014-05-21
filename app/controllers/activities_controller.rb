@@ -6,6 +6,7 @@ class ActivitiesController < ApplicationController
   def create
     @group = Group.find(params[:group_id])
     @activity = @group.activities.create(activity_params)
+
     redirect_to group_path(@group)
   end
 

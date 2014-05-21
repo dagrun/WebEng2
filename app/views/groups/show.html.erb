@@ -26,22 +26,21 @@
 <%if @group.owner_id == current_user.id %>
 <h2>Add an Activtiy:</h2>
           <p>Give it an Image</p>
-            <script>var selected_image_url = "";</script>
             <%= form_tag(search_group_path, :method => "post", id: "search-form") do %>
               <%= text_field_tag :search, params[:search], placeholder: "Enter Search Terms" %>
               <%= submit_tag "Search", :name => nil %>
             <% end %>
-            <% if Rails.cache.read('list_url') != nil %>
-                     <%Rails.cache.read('list_url').each do |image|%>
-                        <%= image_tag(image,:size => '250x250') %>
-                        <%= radio_button_tag 'image_url', image %>
-
-                     <% end %>
-                <% Rails.cache.clear %>
-            <% end %>
 
 
   <%= form_for([@group, @group.activities.build]) do |f| %>
+        <% if Rails.cache.read('list_url') != nil %>
+            <%Rails.cache.read('list_url').each do |image|%>
+                <%= image_tag(image,:size => '250x250') %>
+                <input type='radio' class="image_radio" name="activity[image_url]" value="<%=image%>">
+            <% end %>
+            <% Rails.cache.delete('list_url') %>
+        <% end %>
+
       <%= f.label :name %>
       <%= f.text_field :name %>
 
@@ -55,8 +54,6 @@
 
       <%= f.label :Description %>
       <%= f.text_field :description %>
-
-
 
       <%= f.submit %>
   <% end %>
