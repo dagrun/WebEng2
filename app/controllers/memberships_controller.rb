@@ -7,16 +7,17 @@ class MembershipsController < ApplicationController
     @membership = Membership.new(:group_id => params[:group], :user_id => params[:member] )   
     if @membership.save
       flash[:success] = "Member was added to group!"
-      redirect_to root_url
+      redirect_to current_user
     else
       flash[:error] = "Member was not added to group"
-      redirect_to root_url
+      redirect_to current_user
     end
   end
 
   def destroy
-    @membership.destroy
-    redirect_to root_url
+    Membership.find_by(:user_id => params[:member]).destroy
+    flash[:success] = "Member removed."
+    redirect_to current_user
   end
 
   private
