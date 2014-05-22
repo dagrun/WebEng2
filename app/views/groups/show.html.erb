@@ -18,15 +18,15 @@
 
 <%= render partial: "member_info", locals: {member_count: @members.count} %>
 
- <% if (Membership.where(:user_id => current_user.id, :group_id => @group.id).first != nil || current_user.id == @group.owner_id) %>
- <% if @group.activities.count > 0  %>
+ <% if Membership.where(:user_id => current_user.id, :group_id => @group.id).first != nil || current_user.id == @group.owner_id %>
+    <% if @group.activities.count > 0  %>
   <div class="row-fluid">
     <h3>Activities: </h3>
 
      <%= render partial: "activity", collection: @group.activities %>
       <br/><br/>
+    <% end %>
 <% end %>
-
 <%if @group.owner_id == current_user.id %>
 <h2>Add an Activtiy:</h2>
           <p>Give it an Image</p>
@@ -34,7 +34,6 @@
               <%= text_field_tag :search, params[:search], placeholder: "Enter Search Terms" %>
               <%= submit_tag "Search", :name => nil %>
             <% end %>
-<% end %>
 
   <%= form_for([@group, @group.activities.build]) do |f| %>
         <% if Rails.cache.read('list_url') != nil %>
