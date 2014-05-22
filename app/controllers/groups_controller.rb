@@ -93,7 +93,7 @@ class GroupsController < ApplicationController
     end
     
 		def correct_user
-      @group = current_user.owned_groups.find_by(id: params[:id])
+      @group = current_user.owned_groups.find_by(:id => params[:id])
       redirect_to root_url if @group.nil?
     end
 end
