@@ -9,7 +9,7 @@
       <%= f.label :home_town%>
       <%= f.text_field :home_town%>
       <%= f.label "Add members"%>
-      <%= select_tag "members", options_from_collection_for_select(@users, "id", "name"), multiple: true %>
+      <%= select_tag "members", options_from_collection_for_select(@users.where('users.id != ?', current_user.id.to_s), "id", "name"), multiple: true %>
       <%= f.submit "Create", class: "btn btn-large btn-primary" %>
     <% end %>
   </div>

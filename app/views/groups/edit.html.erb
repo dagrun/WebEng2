@@ -22,10 +22,12 @@
   <div class="row-fluid">
     <h2>Add users:</h2>
     <% @nonmembers.each do |m| %>
-      <div class="span3 offset1">
-        <%=m.name%>
-        <%= link_to 'Add', createmem_path( :member=> m, :group => @group ) %>
-      </div>
+        <% if m.id != @group.owner_id %>
+          <div class="span3 offset1">
+            <%=m.name%>
+            <%= link_to 'Add', createmem_path( :member=> m, :group => @group ) %>
+          </div>
+            <% end %>
     <%end%>
   </div>
 <%else%>
@@ -36,7 +38,7 @@
 
 <% if @members.count>0 %>
   <div class="row-fluid">
-    <h2>Add users:</h2>
+    <h2>Remove users:</h2>
     <% @members.each do |m| %>
       <div class="span3 offset1">
         <%=m.name%>
