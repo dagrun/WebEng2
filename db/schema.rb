@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140520204251) do
+ActiveRecord::Schema.define(version: 20140518183121) do
 
   create_table "activities", force: true do |t|
     t.string   "name"
@@ -23,7 +23,6 @@ ActiveRecord::Schema.define(version: 20140520204251) do
     t.integer  "group_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "definitive"
   end
 
   add_index "activities", ["group_id"], name: "index_activities_on_group_id"

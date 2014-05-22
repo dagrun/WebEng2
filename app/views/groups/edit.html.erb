@@ -33,3 +33,19 @@
     <h3>All users are all ready members</h3>
   </div>
 <%end%>
+
+<% if @members.count>0 %>
+  <div class="row-fluid">
+    <h2>Add users:</h2>
+    <% @members.each do |m| %>
+      <div class="span3 offset1">
+        <%=m.name%>
+        <%= link_to 'Remove', destroymem_path( :member=> m, :group => @group ) %>
+      </div>
+    <%end%>
+  </div>
+<%else%>
+  <div class="row-fluid">
+    <h3>This group dont have any users yet</h3>
+  </div>
+<%end%>
