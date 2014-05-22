@@ -20,5 +20,16 @@
 
       <%= f.submit "Save changes", class: "btn btn-large btn-primary" %>
     <% end %>
+
+<h2>Twitter</h2>
+<% if current_user.twitter? %>
+    Twitter is authorised
+    <%= link_to 'Deauthorise Twitter', twitter_path, :method => :delete %>
+<% else %>
+    Twitter is not autorised
+    <%= link_to 'Authorise Twitter', twitter_index_path, :method => :post %>
+<% end %>
+
+
   </div>
 </div>
