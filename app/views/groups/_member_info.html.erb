@@ -4,16 +4,17 @@
         <h3>Members:</h3>
       </div>
     </div>
-    <div class="row-fluid">
+    
       <% @members.each do |m| %>
-          <div class="span2 offset1">
-            <%=m.name%>
-          </div>
-          <div class="span2 offset1">
-            <%= link_to "View", user_path(m) %>
+          <div class="row-fluid">
+            <div class="span2 offset1">
+              <%=m.name%>
+            </div>
+            <div class="span2 offset1">
+              <%= link_to "View", user_path(m) %>
+            </div>
           </div>
       <%end%>
-    </div>
 <%else%>
     <div class="row-fluid">
       <div class="span11 offset1">

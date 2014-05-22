@@ -35,7 +35,6 @@ class GroupsController < ApplicationController
   def new
     @group = Group.new
     @users = User.all
-    @users.delete(current_user)
   end
   
   def create
@@ -66,13 +65,12 @@ class GroupsController < ApplicationController
     @group = Group.find(params[:id])
     @members = @group.users
     @nonmembers = User.all - @members
-    @nonmembers.delete(@group.owner)
   end
   def update
     @group = Group.find(params[:id])
     @members = @group.users
     @nonmembers = User.all - @members
-    @nonmembers.delete(@group.owner)
+    @owner = @group.owner
     if @group.update_attributes(group_params)
       flash[:success] = "Group updated"
       redirect_to current_user
