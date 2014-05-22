@@ -20,9 +20,32 @@ class User < ActiveRecord::Base
     Digest::SHA1.hexdigest(token.to_s)
   end
 
-  private
+  def twitter?
+    self.twitter_token && self.twitter_secret
+  end
 
-    def create_remember_token
-      self.remember_token = User.digest(User.new_remember_token)
+  attr_accessor :twitter_client
+  def twitter
+    if twitter?
+      return self.twitter_client if self.twitter_client
+      self.twitter_client = TwitterOAuth::Client.new(
+          :consumer_key => TWITTER_CONSUMER_KEY,
+          :consumer_secret => TWITTER_CONSUMER_SECRET,
+          :token => self.twitter_token,
+          :secret => self.twitter_secret
+      )
+    else
+      false
     end
+  end
+
+  private
+  def create_remember_token
+    self.remember_token = User.digest(User.new_remember_token)
+  end
+
+
+
+
+
 end

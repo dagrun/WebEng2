@@ -13,7 +13,10 @@ MeetAct::Application.routes.draw do
   end
 resources :activities do
 	post 'setdef'
-end
+  end
+resources :twitter
+
+
   resources :memberships, only: [:new, :create, :destroy]
 	resources :sessions, only: [:new, :create, :destroy]
   match '/signup',  to: 'users#new',            via: 'get'
