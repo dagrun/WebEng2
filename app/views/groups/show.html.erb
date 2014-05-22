@@ -1,13 +1,17 @@
 <% provide(:title, "Meetup Group") %>
 
 <div class="row-fluid">
-  <div class="span4 offset1">
+  <div class="span3 offset1">
     <h2>Topic</h2>
     <p><%= @group.topic %></p>
   </div>
-  <div class="span4 offset2">
+  <div class="span2 offset1">
     <h3>Home Town</h3>
     <p><%= @group.home_town %></p>
+  </div>
+  <div class="span3 offset1">
+    <h3>Time of creation</h3>
+    <p><%= @group.created_at %></p>
   </div>
 </div>
 
